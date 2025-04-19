@@ -5,6 +5,8 @@ from sympy import symbols, Eq, solve, diff, integrate, sin, cos, expand, simplif
 import streamlit as st
 from numpy import *
 import random
+from sympy import latex
+
 
 def generate_calculus(concept,  num_problems):
     problems = []
@@ -53,33 +55,21 @@ def generate_calculus(concept,  num_problems):
 
     for _ in range(num_problems):
         if problem_type == "Integrals":
-            if difficulty == "Easy":
-                degree = random.randint(1, 3)
-                bounds_present = False
-                integral = create_integral(generate_random_polynomial(degree), bounds_present)
-                
-                problems.append(st.write(integral))
-                answer = integral.doit()  # evaluate the integral properly
-                st.write(answer)
-                solutions.append(f"x = {answer}")
-            elif difficulty == "Medium":
-                degree = random.randint(2, 4)
-                bounds_present = True
-                integral = create_integral(generate_random_polynomial(degree), bounds_present)
-                
-                problems.append(st.write(integral))
-                answer = integral.doit()  # evaluate the integral properly
-                st.write(answer)
-                solutions.append(f"x = {answer}")
-            elif difficulty == "Hard":
-                degree = random.randint(3, 5)
-                bounds_present = True
-                integral = create_integral(generate_random_polynomial(degree), bounds_present)
-                
-                problems.append(st.write(integral))
-                answer = integral.doit()  # evaluate the integral properly
-                st.write(answer)
-                solutions.append(f"x = {answer}")
+            degree = {
+                "Easy": random.randint(1, 3),
+                "Medium": random.randint(2, 4),
+                "Hard": random.randint(3, 5)
+            }[difficulty]
+
+            bounds_present = difficulty != "Easy"
+            integral = create_integral(generate_random_polynomial(degree), bounds_present)
+            answer = integral.doit()
+
+            latex_problem = rf"$$ {latex(integral)} $$"
+            latex_solution = rf"$$ {latex(answer)} $$"
+
+            problems.append(latex_problem)
+            solutions.append(latex_solution)
 
         elif problem_type == "Limits":
             if difficulty == "Easy":
