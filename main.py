@@ -9,7 +9,7 @@ from algebra import generate_algebra
 from geometry import generate_geometry
 from word_problems import generate_word_problems
 from utils import create_download_buttons
-from truthtable import generate_truthtables
+from truthtable import generate_truthtable
 
 
 st.title("Number Ninja")
@@ -33,7 +33,7 @@ else:
                         "Algebra": generate_algebra,
                         "Geometry": generate_geometry,
                         "Word Problems": generate_word_problems,
-                        "Truth Table": generate_truthtables}
+                        "Truth Table": generate_truthtable}
     st.write("## Problem Settings")
 
     # Use session state to persist values
