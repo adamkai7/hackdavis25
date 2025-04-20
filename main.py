@@ -26,14 +26,17 @@ selected_concepts = st.sidebar.multiselect(
 if not selected_concepts:
     st.info("Please select at least one math concept from the sidebar to generate problems.")
 else:
-    concept_generators = {"Calculus": generate_calculus,
-                          "Trignometry": generate_trigonometry,
-                          "Basic Arithmetic": generate_basic_arithmetic,
-                        "Fractions": generate_fractions,
-                        "Algebra": generate_algebra,
-                        "Geometry": generate_geometry,
-                        "Word Problems": generate_word_problems,
-                        "Truth Table": generate_truthtable}
+    concept_generators = {
+        "Calculus": generate_calculus,
+        "Trignometry": generate_trigonometry,
+        "Basic Arithmetic": generate_basic_arithmetic,
+        "Fractions": generate_fractions,
+        "Algebra": generate_algebra,
+        "Geometry": generate_geometry,
+        "Word Problems": generate_word_problems,
+        "Truth Table": generate_truthtable
+    }
+    
     st.write("## Problem Settings")
 
     # Use session state to persist values
@@ -55,19 +58,33 @@ else:
 
     all_problems = {}
     all_solutions = {}
+    all_word_problems = {}
 
     for concept in selected_concepts:
         st.write(f"### {concept}")
 
-        problems, solutions = concept_generators[concept](
-            concept, st.session_state.num_problems
-        )
+        # Handle calculus separately since it returns 3 values
+        if concept == "Calculus":
+            problems, solutions, word_problems = concept_generators[concept](
+                concept, st.session_state.num_problems
+            )
+            all_word_problems[concept] = word_problems
+        else:
+            # Other generators return only problems and solutions
+            problems, solutions = concept_generators[concept](
+                concept, st.session_state.num_problems
+            )
 
         all_problems[concept] = problems
         all_solutions[concept] = solutions
 
-        for i, (problem, solution) in enumerate(zip(problems, solutions)):
-            st.write(f"**Problem {i+1}:** {problem}")
+        # Display problems with word problems for Calculus
+        for i, problem in enumerate(problems):
+            if concept == "Calculus":
+                st.write(f"**Word Problem {i+1}:** {all_word_problems[concept][i]}")
+                st.write(f"**Mathematical Formulation {i+1}:** {problem}")
+            else:
+                st.write(f"**Problem {i+1}:** {problem}")
 
     with st.expander("View Solutions"):
         for concept in selected_concepts:
