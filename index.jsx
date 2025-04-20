@@ -1,3 +1,25 @@
+import React, { useState } from "react";
+
+export const Home = () => {
+  const [problems, setProblems] = useState([]);
+
+  async function fetchProblems() {
+    const response = await fetch("http://localhost:8000/generate", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        concept: "Algebra",
+        num_problems: 3,
+        type: "Age Problems"
+      }),
+    });
+
+    const data = await response.json();
+    setProblems(data.problems);
+  }
+
 import React from "react";
 import image1 from "./image-1.png";
 import image from "./image.svg";
