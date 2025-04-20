@@ -1,0 +1,35 @@
+:root {
+  --accent: rgba(0, 123, 255, 1);
+  --alert: rgba(231, 76, 60, 1);
+  --background: rgba(242, 242, 242, 1);
+  --body-font-family: "Montserrat", Helvetica;
+  --body-font-size: 16px;
+  --body-font-style: normal;
+  --body-font-weight: 500;
+  --body-letter-spacing: 0px;
+  --body-line-height: 139.9999976158142%;
+  --header-2-font-family: "Quicksand", Helvetica;
+  --header-2-font-size: 40px;
+  --header-2-font-style: normal;
+  --header-2-font-weight: 700;
+  --header-2-letter-spacing: -0.8px;
+  --header-2-line-height: normal;
+  --header-3-font-family: "Quicksand", Helvetica;
+  --header-3-font-size: 24px;
+  --header-3-font-style: normal;
+  --header-3-font-weight: 700;
+  --header-3-letter-spacing: -0.48px;
+  --header-3-line-height: normal;
+  --hover: rgba(93, 63, 211, 1);
+  --interaction: rgba(46, 204, 113, 1);
+  --primary: rgba(30, 30, 30, 1);
+  --secondary: rgba(255, 217, 61, 1);
+  --sizing-radius-radius-full: 9999px;
+  --sizing-radius-radius-small: 2px;
+  --title-header-1-font-family: "Quicksand", Helvetica;
+  --title-header-1-font-size: 64px;
+  --title-header-1-font-style: normal;
+  --title-header-1-font-weight: 700;
+  --title-header-1-letter-spacing: -1.28px;
+  --title-header-1-line-height: normal;
+}
