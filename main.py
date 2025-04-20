@@ -2,6 +2,14 @@ import streamlit as st
 import random
 import math
 from calculus import generate_calculus
+from trignometry import generate_trigonometry
+from arithmetic import generate_basic_arithmetic 
+from fractions2 import generate_fractions
+from algebra import generate_algebra
+from geometry import generate_geometry
+from word_problems import generate_word_problems
+from utils import create_download_buttons
+
 
 st.title("Number Ninja")
 st.write("Generate custom math problems based on your preferences!")
@@ -10,14 +18,20 @@ st.write("Generate custom math problems based on your preferences!")
 st.sidebar.header("Select Math Concepts")
 selected_concepts = st.sidebar.multiselect(
     "Choose concepts you want to practice:",
-    ["Calculus"],
+    ["Calculus", "Trignometry", "Basic Arithmetic", "Fractions", "Algebra", "Geometry", "Word Problems"],
     default=["Calculus"]
 )
 
 if not selected_concepts:
     st.info("Please select at least one math concept from the sidebar to generate problems.")
 else:
-    concept_generators = {"Calculus": generate_calculus}
+    concept_generators = {"Calculus": generate_calculus,
+                          "Trignometry": generate_trigonometry,
+                          "Basic Arithmetic": generate_basic_arithmetic,
+                        "Fractions": generate_fractions,
+                        "Algebra": generate_algebra,
+                        "Geometry": generate_geometry,
+                        "Word Problems": generate_word_problems}
     st.write("## Problem Settings")
 
     # Use session state to persist values
