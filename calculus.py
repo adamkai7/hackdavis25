@@ -1,6 +1,6 @@
 # calculus.py
 # It's over
-from sympy import symbols
+from sympy import diff, symbols
 from sympy import (
     symbols, sin, cos, tan, log, exp, sqrt, Abs,
     Integral, limit, simplify, oo, pi, S, latex
@@ -54,6 +54,10 @@ def generate_calculus(concept,  num_problems):
             integral_expr = Integral(poly_expr, x)
         
         return integral_expr
+    
+    def create_derivative(expr):
+        x = symbols('x')
+        return diff(expr, x)
 
     def generate_easy_expression(x, approach_point):
         """Generate an easy limit expression."""
@@ -340,12 +344,21 @@ def generate_calculus(concept,  num_problems):
             solutions.append(solution)
             
         elif problem_type == "Derivatives":
-            if difficulty == "Easy":
-                pass
-            elif difficulty == "Medium":
-                pass
-            elif difficulty == "Hard":
-                pass
+            degree = {
+                "Easy": random.randint(1, 2),
+                "Medium": random.randint(2, 4),
+                "Hard": random.randint(3, 5)
+            }[difficulty]
+
+            poly_expr = generate_random_polynomial(degree)
+            derivative = create_derivative(poly_expr)
+            answer = derivative.doit()
+
+            latex_problem = rf"$$ \frac{{d}}{{dx}} \left( {latex(poly_expr)} \right) $$"
+            latex_solution = rf"$$ {latex(answer)} $$"
+
+            problems.append(latex_problem)
+            solutions.append(latex_solution)
 
         elif problem_type == "Polars":
             if difficulty == "Easy":
